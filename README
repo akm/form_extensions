@@ -1,13 +1,32 @@
 FormExtensions
 ==============
+フォームに関する拡張を提供します。
 
-Introduction goes here.
+= インストール =
+ruby script/plugin install git://github.com/akm/form_extensions.git
+
+= 使い方 =
+== submit_tag, submit ==
+標準のsubmit_tag, submitに加えて、:url、:method、:multipartオプションが使用可能です。
 
 
-Example
-=======
+form_forの中ではこんな感じに使えます。
 
-Example goes here.
+<% form_for(@person) do |f| %>
+    <%= f.submit "Update", :url => {:action => 'update', :id => @person.id}, :method => 'put'  %>
+    <%= f.submit "Copy", :url => {:action => 'create'}, :method => 'post' %>
+    <%= f.submit "Toggle", :url => {:action => 'toggle_deleted', :id => @person.id}, :method => 'post' %>
+<% end %>
+
+
+
+form_forではなくform_tagの中ではこんな感じに使えます。
+<% form_tag('/people') do  %>
+    <%= submit_tag "Update", :url => {:action => 'update', :id => @person.id}, :method => 'put'  %>
+    <%= submit_tag "Copy", :url => {:action => 'create'}, :method => 'post' %>
+    <%= submit_tag "Toggle", :url => {:action => 'toggle_deleted', :id => @person.id}, :method => 'post' %>
+<% end %>
+
 
 
 Copyright (c) 2008 Takeshi AKIMA, released under the MIT license
