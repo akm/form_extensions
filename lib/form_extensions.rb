@@ -33,7 +33,8 @@ module FormExtensions
     java_scripts << "this.form.action='#{action}'" if action
     java_scripts << "if (this.form['_method'] == null){this.form.method='#{method}'}else{this.form['_method'].value = '#{method}'}" if method
     java_scripts << "this.form.enctype='#{enctype}'" if enctype
-    options['onclick'] = java_scripts.compact.join(';')
+    java_scripts.compact!
+    options['onclick'] = java_scripts.join(';') unless java_scripts.empty?
     result = yield(options)
     if @form_extentension_submit_suffix_no
       @form_extentension_submit_suffix_no += 1
